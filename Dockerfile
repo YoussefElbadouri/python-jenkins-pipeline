@@ -1,16 +1,19 @@
-# Utiliser une image de base Python
+# Base image
 FROM python:3.9-slim
 
-# Définir le répertoire de travail dans le container
+# Installer curl
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
+
+# Set the working directory
 WORKDIR /app
 
-# Copier les fichiers dans le container
+# Copier les fichiers
 COPY . /app
 
 # Installer les dépendances
 RUN pip install -r requirements.txt
 
-# Exposer le port 5000
+# Exposer le port
 EXPOSE 5000
 
 # Lancer l'application
